@@ -17,6 +17,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_ChooseFileBtn_clicked();
+
+    void on_actionOpen_triggered();
+
+    void on_actionExit_triggered();
+
+    std::string loadFile();
+
+    void SetOpenGLFrame();
 private:
     Ui::MainWindow *ui;
 };

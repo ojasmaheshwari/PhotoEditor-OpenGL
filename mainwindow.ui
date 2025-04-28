@@ -58,12 +58,12 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0">
+          <layout class="QVBoxLayout" name="MainFrame" stretch="0">
            <property name="sizeConstraint">
             <enum>QLayout::SizeConstraint::SetFixedSize</enum>
            </property>
            <item alignment="Qt::AlignmentFlag::AlignHCenter">
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="ChooseFileBtn">
              <property name="enabled">
               <bool>true</bool>
              </property>
@@ -91,6 +91,9 @@
              <property name="checkable">
               <bool>false</bool>
              </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
             </widget>
            </item>
           </layout>
@@ -113,18 +116,30 @@
    </property>
    <widget class="QMenu" name="menuOpen">
     <property name="title">
-     <string>Open</string>
+     <string>File</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menuExit">
-    <property name="title">
-     <string>Exit</string>
-    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionExit"/>
    </widget>
    <addaction name="menuOpen"/>
-   <addaction name="menuExit"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ApplicationExit"/>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
