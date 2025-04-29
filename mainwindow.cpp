@@ -15,11 +15,8 @@ std::string MainWindow::loadFile() {
 }
 
 void MainWindow::SetOpenGLFrame() {
-    auto mainFrame = this->findChild<QVBoxLayout*>("MainFrame");
-    QOpenGLWidget widget((QWidget*)mainFrame);
-
-    mainFrame->addWidget(&widget);
-
+    m_OpenGLWidget->show();
+    m_ChooseButton->hide();
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -27,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    m_OpenGLWidget = this->findChild<QOpenGLWidget*>("openGLWidget");
+    m_ChooseButton = this->findChild<QPushButton*>("ChooseFileBtn");
+    m_OpenGLWidget->hide();
 }
 
 MainWindow::~MainWindow()

@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QOpenGLWidget>
+#include <QPushButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,5 +31,7 @@ private slots:
     void SetOpenGLFrame();
 private:
     Ui::MainWindow *ui;
+    QOpenGLWidget* m_OpenGLWidget;
+    QPushButton* m_ChooseButton;
 };
 #endif // MAINWINDOW_H
