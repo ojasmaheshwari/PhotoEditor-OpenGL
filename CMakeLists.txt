@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-add_compile_definitions(GLEW_STATIC)
+add_definitions(-DGLEW_STATIC)
 
 project(PhotoEditor VERSION 0.1 LANGUAGES CXX)
 
@@ -10,6 +10,9 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(GLEW_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/Dependencies/GLEW/include)
+set(GLEW_LIBRARY ${CMAKE_SOURCE_DIR}/Dependencies/GLEW/lib/Release/x64/glew32s.lib)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
@@ -46,24 +49,14 @@ else()
     endif()
 endif()
 
-set(GLEW_ROOT "${CMAKE_SOURCE_DIR}/Dependencies/GLEW")
-
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(GLEW_LIB_DIR "${GLEW_ROOT}/lib/Release/x64")
-else()
-    set(GLEW_LIB_DIR "${GLEW_ROOT}/lib/Release/Win32")
-endif()
-
-link_directories(${GLEW_LIB_DIR})
-
+include_directories(${GLEW_INCLUDE_DIR})
 target_include_directories(PhotoEditor
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/src/vendor
         ${CMAKE_CURRENT_SOURCE_DIR}/src
-        ${GLEW_ROOT}/include
 )
 
-target_link_libraries(PhotoEditor PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGLWidgets glew32 ${OPENGL_gl_LIBRARY})
+target_link_libraries(PhotoEditor PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${GLEW_LIBRARY} Qt${QT_VERSION_MAJOR}::OpenGLWidgets ${OPENGL_gl_LIBRARY})
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

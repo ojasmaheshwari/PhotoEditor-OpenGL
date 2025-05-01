@@ -13,6 +13,14 @@ OpenGLWidget::OpenGLWidget(QWidget* parent)
 }
 
 void OpenGLWidget::initializeGL() {
+
+    if (glewInit() != GLEW_OK) {
+        std::cout << "Error initializing GLEW\n";
+    }
+
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback(MessageCallback, nullptr);
+
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     std::cout << glGetString(GL_VERSION) << '\n';
 
@@ -26,14 +34,16 @@ void OpenGLWidget::initializeGL() {
         0, 1, 2, 2, 3, 0
     };
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // glEnable(GL_BLEND);
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     vb = new VertexBuffer(positions, 4 * 4 * sizeof(float));
 
     VertexBufferLayout layout;
     layout.Push_f(2);
     layout.Push_f(2);
+
+    va = new VertexArray();
     va->AddBuffer(*vb, layout);
 
     ib = new IndexBuffer(indices, 6);
@@ -65,9 +75,4 @@ void OpenGLWidget::paintGL() {
 }
 
 OpenGLWidget::~OpenGLWidget() {
-    delete renderer;
-    delete vb;
-    delete va;
-    delete ib;
-    delete shader;
 }
