@@ -18,6 +18,7 @@ void OpenGLWidget::initializeGL() {
         std::cout << "Error initializing GLEW\n";
     }
 
+    glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, nullptr);
 
@@ -51,7 +52,7 @@ void OpenGLWidget::initializeGL() {
     shader = new Shader("res/shaders/basic.glsl");
     shader->Bind();
 
-    texture = new Texture("res/textures/doge.png");
+    texture = new Texture("res/textures/gorilla.png");
     texture->Bind();
     shader->SetUniform1i("u_Texture", 0);
 
@@ -69,6 +70,7 @@ void OpenGLWidget::resizeGL(int w, int h) {
 
 void OpenGLWidget::paintGL() {
     glClear(GL_COLOR_BUFFER_BIT);
+    texture->Bind();
     renderer->Clear();
 
     renderer->Draw(*va, *ib, *shader);
