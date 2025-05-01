@@ -1,5 +1,5 @@
-#include "IndexBuffer.h"
 #include "Renderer.h"
+#include "IndexBuffer.h"
 #include <assert.h>
 
 IndexBuffer::IndexBuffer() {}

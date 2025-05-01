@@ -1,16 +1,14 @@
 #include "Shader.h"
 
-#include <string>
-#include <sstream>
-#include <iostream>
-#include <fstream>
-
 #include "Renderer.h"
+#include <iostream>
+#include <sstream>
+#include <fstream>
 
 Shader::Shader(){}
 
 Shader::Shader(const std::string &filePath)
-	: m_FilePath(m_FilePath), m_RendererID(0)
+    : m_FilePath(filePath), m_RendererID(0)
 {
 	ShaderProgramSource source = ParseShader(filePath);
 	m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
