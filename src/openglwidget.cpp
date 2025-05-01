@@ -34,28 +34,28 @@ void OpenGLWidget::initializeGL() {
         0, 1, 2, 2, 3, 0
     };
 
-    // glEnable(GL_BLEND);
-    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     vb = new VertexBuffer(positions, 4 * 4 * sizeof(float));
 
-    VertexBufferLayout layout;
-    layout.Push_f(2);
-    layout.Push_f(2);
+    layout = new VertexBufferLayout();
+    layout->Push_f(2);
+    layout->Push_f(2);
 
     va = new VertexArray();
-    va->AddBuffer(*vb, layout);
+    va->AddBuffer(*vb, *layout);
 
     ib = new IndexBuffer(indices, 6);
 
     shader = new Shader("res/shaders/basic.glsl");
     shader->Bind();
 
-    Texture texture("res/textures/gorilla.png");
-    texture.Bind();
+    texture = new Texture("res/textures/doge.png");
+    texture->Bind();
     shader->SetUniform1i("u_Texture", 0);
 
-    Renderer renderer;
+    renderer = new Renderer();
 
     va->Unbind();
     vb->Unbind();
