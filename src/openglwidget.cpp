@@ -53,7 +53,6 @@ void OpenGLWidget::initializeGL() {
     shader->Bind();
 
     texture = new Texture("res/textures/gorilla.png");
-    texture->Bind();
     shader->SetUniform1i("u_Texture", 0);
 
     renderer = new Renderer();
@@ -77,4 +76,18 @@ void OpenGLWidget::paintGL() {
 }
 
 OpenGLWidget::~OpenGLWidget() {
+    // delete texture;
+    // delete renderer;
+    // delete vb;
+    // delete va;
+    // delete ib;
+    // delete shader;
+    // delete layout;
+}
+
+void OpenGLWidget::LoadImage(const std::string &filePath) {
+    texture->Unbind();
+    delete texture;
+    texture = new Texture(filePath);
+    texture->Bind();
 }

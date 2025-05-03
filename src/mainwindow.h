@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QOpenGLWidget>
 #include <QPushButton>
+#include <openglwidget.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,7 +32,7 @@ private slots:
     void LoadImage();
 private:
     Ui::MainWindow *ui;
-    QOpenGLWidget* m_OpenGLWidget;
+    OpenGLWidget* m_OpenGLWidget;
     QPushButton* m_ChooseButton;
 };
 #endif // MAINWINDOW_H

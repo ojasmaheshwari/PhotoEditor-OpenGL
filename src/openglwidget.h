@@ -2,13 +2,13 @@
 #define OPENGLWIDGET_H
 
 #include <QOpenGLWidget>
+#include <Texture.h>
 
 class Renderer;
 class VertexBuffer;
 class VertexArray;
 class IndexBuffer;
 class Shader;
-class Texture;
 class VertexBufferLayout;
 
 class OpenGLWidget : public QOpenGLWidget
@@ -17,6 +17,8 @@ class OpenGLWidget : public QOpenGLWidget
 public:
     OpenGLWidget(QWidget* parent = nullptr);
     ~OpenGLWidget();
+
+    void LoadImage(const std::string &filePath);
 private:
     void initializeGL() override;
     void resizeGL(int w, int h) override;

@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "openglwidget.h"
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <filesystem>
 #include <iostream>
@@ -13,11 +13,6 @@ std::string MainWindow::loadFile() {
     auto filePath = QFileDialog::getOpenFileName(this,
                                                  tr("Open Image"), cwd.c_str(), tr("Image Files (*.png *.jpg *.bmp)"));
     return filePath.toStdString();
-}
-
-void MainWindow::LoadImage() {
-    m_OpenGLWidget->show();
-    m_ChooseButton->hide();
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -35,16 +30,27 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::LoadImage() {
+    std::string filePath = loadFile();
+    if (m_OpenGLWidget->isHidden())
+        m_OpenGLWidget->show();
+    if (m_ChooseButton->isVisible())
+        m_ChooseButton->hide();
+
+    m_OpenGLWidget->LoadImage(filePath);
+
+    m_OpenGLWidget->resize(m_OpenGLWidget->width() + 1, m_OpenGLWidget->height() + 1);
+}
+
 void MainWindow::on_ChooseFileBtn_clicked()
 {
-    std::string filePath = loadFile();
     LoadImage();
 }
 
 
 void MainWindow::on_actionOpen_triggered()
 {
-    std::string filePath = loadFile();
+    LoadImage();
 }
 
 
